@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Маникюрный Салон</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .header {
+            text-align: center;
+            padding: 50px;
+            background-color: #007bff;
+            color: white;
+        }
+        .header h1 {
+            font-size: 3em;
+        }
+        .icon-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .icon-box {
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .icon-box:hover {
+            transform: scale(1.1);
+        }
+        .icon-box i {
+            font-size: 4em;
+            color: #007bff;
+        }
+        .icon-box h3 {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+        .cta-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1 th:text="${title}">Маникюрный Салон</h1>
+    <p>Мы делаем мир красивее, один ноготь за раз!</p>
+    <p th:if="${message}" th:text="${message}" class="alert alert-success"></p>
+</div>
+
+<!-- Секция с иконками и анимацией -->
+<div class="container icon-section">
+    <div class="icon-box">
+        <i class="fas fa-info-circle"></i>
+        <h3>О нас</h3>
+        <p>Узнайте больше о нашем салоне.</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-paint-brush"></i>
+        <h3>Услуги</h3>
+        <p>Мы предлагаем широкий спектр услуг маникюра и педикюра.</p>
+    </div>
+    <div class="icon-box">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Записаться</h3>
+        <p>Запишитесь на удобное для вас время.</p>
+    </div>
+</div>
+
+<!-- Динамический список услуг -->
+<div class="container">
+    <h2>Наши Услуги</h2>
+    <ul class="list-group">
+        <li class="list-group-item" th:each="service : ${services}">
+            <span th:text="${service.name}">Название услуги</span> -
+            <span th:text="${service.price}">Цена услуги</span> ₽
+        </li>
+    </ul>
+</div>
+
+<!-- Кнопка для записи -->
+<div class="text-center">
+    <a href="/appointments/new" class="cta-button">Записаться на приём</a>
+</div>
+
+<!-- Кнопка для просмотра записей клиента -->
+<div class="container text-center mt-5">
+    <h3>Посмотреть мои записи</h3>
+    <form th:action="@{/appointments/client}" method="get" class="form-inline justify-content-center">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="clientId" class="sr-only">ID клиента</label>
+            <input type="number" class="form-control" id="clientId" name="clientId" placeholder="Ваш ID" required>
+        </div>
+        <button type="submit" class="btn btn-secondary mb-2">Показать записи</button>
+    </form>
+</div>
+
+<!-- Кнопка для регистрации -->
+<div class="form-group text-center mt-4">
+    <small>Ещё нет аккаунта? <a href="/clients/register">Зарегистрируйтесь здесь</a></small>
+</div>
+
+<!-- Bootstrap и jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

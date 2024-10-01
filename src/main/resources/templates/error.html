@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ошибка</h1>
+    <p th:text="${error}">Клиент не найден.</p>
+    <a href="/" class="btn btn-primary">На главную</a>
+</div>
+<h1>Произошла ошибка</h1>
+<p th:text="${errorMessage}">Неизвестная ошибка</p>
+<a href="/">Вернуться на главную</a>
+</body>
+</html>

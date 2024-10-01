@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои записи</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Записи клиента <span th:text="${client.name} + ' ' + ${client.firstName}"></span></h1>
+
+    <!-- Сообщение об успешном удалении -->
+    <p th:if="${message}" th:text="${message}" class="alert alert-success"></p>
+
+    <!-- Таблица с записями -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Услуга</th>
+            <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.date}"></td>
+            <td th:text="${appointment.time}"></td>
+            <td th:text="${appointment.service.name}"></td>
+            <td>
+                <form th:action="@{/appointments/delete/{appointmentId}(appointmentId=${appointment.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/" class="btn btn-primary">На главную</a>
+</div>
+
+</body>
+</html>
