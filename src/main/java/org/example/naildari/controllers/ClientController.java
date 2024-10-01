@@ -36,25 +36,15 @@ public class ClientController {
 
         return "home"; // имя шаблона: home.html
     }
+
     @GetMapping("/register")
     public String showRegistrationForm() {
         return "register";  // Отображаем страницу регистрации
     }
 
     @PostMapping("/register")
-    public String registerClient(
-            @RequestParam("name") String name,
-            @RequestParam("firstName") String firstName,
-            @RequestParam("phone") String phone,
-            RedirectAttributes redirectAttributes) {
-
-        Client client = new Client();
-        client.setName(name);
-        client.setFirstName(firstName);
-        client.setPhone(phone);
-
+    public String registerClient(@ModelAttribute Client client, RedirectAttributes redirectAttributes) {
         clientService.addClient(client);
-
         redirectAttributes.addFlashAttribute("message", "Регистрация прошла успешно! Ваш ID клиента: " + client.getId());
         return "redirect:/";
     }
