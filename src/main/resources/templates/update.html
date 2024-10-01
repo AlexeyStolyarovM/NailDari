@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных клиента</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Изменение данных клиента</h1>
+
+    <form th:action="@{/clients/update}" method="post">
+        <input type="hidden" name="clientId" th:value="${client.id}" />
+
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${client.name}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">Фамилия</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" th:value="${client.firstName}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" class="form-control" id="phone" name="phone" th:value="${client.phone}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -48,4 +48,23 @@ public class ClientController {
         redirectAttributes.addFlashAttribute("message", "Регистрация прошла успешно! Ваш ID клиента: " + client.getId());
         return "redirect:/";
     }
+
+    @GetMapping("/update/{clientId}")
+    public String showUpdateForm(@PathVariable Long clientId, Model model) {
+        Client client = clientService.getClientById(clientId);
+        model.addAttribute("client", client);
+        return "update";  // Возвращает имя шаблона для отображения
+    }
+
+    @PostMapping("/update")
+    public String updateClient(@RequestParam("clientId") Long id, @ModelAttribute("client") Client clientUpdate, RedirectAttributes redirectAttributes) {
+        Client client = clientService.getClientById(id);
+        client.setFirstName(clientUpdate.getFirstName());
+        client.setName(clientUpdate.getName());
+        client.setPhone(clientUpdate.getPhone());
+        clientService.updateClient(client);
+        redirectAttributes.addFlashAttribute("message", "Данные клиента успешно обновлены!");
+        return "redirect:/";  // Редирект на форму обновления
+    }
+
 }

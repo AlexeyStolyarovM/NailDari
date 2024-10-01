@@ -39,6 +39,8 @@
 
     <a href="/" class="btn btn-primary">На главную</a>
 </div>
-
+<small>
+    <a th:href="@{/clients/update/{clientId}(clientId=${client.id})}" class="btn btn-warning">Изменить свои данные</a>
+</small>
 </body>
 </html>
