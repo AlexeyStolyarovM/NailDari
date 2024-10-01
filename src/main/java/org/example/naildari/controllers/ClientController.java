@@ -64,7 +64,7 @@ public class ClientController {
         client.setPhone(clientUpdate.getPhone());
         clientService.updateClient(client);
         redirectAttributes.addFlashAttribute("message", "Данные клиента успешно обновлены!");
-        return "redirect:/";  // Редирект на форму обновления
+        return "redirect:/";
     }
 
 }
