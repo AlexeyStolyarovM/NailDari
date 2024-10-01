@@ -69,14 +69,12 @@ public class AppointmentController {
     public String viewClientAppointments(@RequestParam Long clientId, Model model,RedirectAttributes redirectAttributes) {
         Client client = clientService.getClientById(clientId);
         List<Appointment> appointments = appointmentService.getAppointmentsByClient(clientId);
-
-        if (client == null) {
-            redirectAttributes.addFlashAttribute("error", "Клиент не найден."); // Сообщение об ошибке
-            return "home"; // Перенаправление на страницу ошибки
-        }
-
         model.addAttribute("client", client);
         model.addAttribute("appointments", appointments);
+        if (client == null) {
+            redirectAttributes.addFlashAttribute("error", "Клиент не найден."); // Сообщение об ошибке
+            return "home";
+        }
         return "client_appointments";  // Страница с отображением записей
     }
 
