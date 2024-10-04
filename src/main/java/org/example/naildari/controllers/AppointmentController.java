@@ -50,6 +50,22 @@ public class AppointmentController {
             @RequestParam("time") String time,
             RedirectAttributes redirectAttributes) {
 
+        LocalDate appointmentDate = LocalDate.parse(date);
+        LocalDate today = LocalDate.now();
+        LocalTime appointmentTime = LocalTime.parse(time);
+        LocalTime minTime = LocalTime.of(10, 0);
+        LocalTime maxTime = LocalTime.of(22, 0);
+
+        // Проверка на прошедшие даты и время
+        if (appointmentDate.isBefore(today) ||
+                appointmentDate.getMonth() != today.getMonth() ||
+                appointmentDate.getYear() != today.getYear() ||
+                (appointmentDate.isEqual(today) && appointmentTime.isBefore(minTime)) ||
+                appointmentTime.isAfter(maxTime)) {
+
+            redirectAttributes.addFlashAttribute("error", "Дата должна быть в текущем месяце, не может быть прошедшей, и время должно быть между 10:00 и 22:00.");
+            return "redirect:/appointments/new"; // Вернуться к форме
+        }
         Client client = clientService.getClientById(clientId);
         Services service = serviceService.getServiceById(serviceId).orElseThrow();
 
@@ -66,7 +82,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments/client")
-    public String viewClientAppointments(@RequestParam Long clientId, Model model,RedirectAttributes redirectAttributes) {
+    public String viewClientAppointments(@RequestParam Long clientId, Model model, RedirectAttributes redirectAttributes) {
         Client client = clientService.getClientById(clientId);
         List<Appointment> appointments = appointmentService.getAppointmentsByClient(clientId);
         model.addAttribute("client", client);

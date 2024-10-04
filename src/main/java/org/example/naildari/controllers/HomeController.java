@@ -16,11 +16,9 @@ public class HomeController {
 
 
     private final ServiceService serviceService;
-    private final ClientService clientService;
 
-    public HomeController(ServiceService serviceService, ClientService clientService) {
+    public HomeController(ServiceService serviceService ) {
         this.serviceService = serviceService;
-        this.clientService = clientService;
     }
 
     @GetMapping("/")
