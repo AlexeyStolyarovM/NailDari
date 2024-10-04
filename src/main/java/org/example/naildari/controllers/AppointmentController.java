@@ -64,7 +64,7 @@ public class AppointmentController {
                 appointmentTime.isAfter(maxTime)) {
 
             redirectAttributes.addFlashAttribute("error", "Дата должна быть в текущем месяце, не может быть прошедшей, и время должно быть между 10:00 и 22:00.");
-            return "redirect:/appointments/new"; // Вернуться к форме
+            return "redirect:/appointments/new";
         }
         Client client = clientService.getClientById(clientId);
         Services service = serviceService.getServiceById(serviceId).orElseThrow();
