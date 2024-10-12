@@ -31,7 +31,7 @@ public class ClientController {
         List<Client> clients = clientService.getAllClients();
 
         model.addAttribute("title", "Маникюрный Салон");
-        model.addAttribute("services", services); // Список услуг
+//        model.addAttribute("services", services); // Список услуг
         model.addAttribute("clients", clients);   // Список клиентов
 
         return "home"; // имя шаблона: home.html

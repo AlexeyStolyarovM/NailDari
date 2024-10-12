@@ -63,7 +63,7 @@
 
 <div class="header">
     <h1 th:text="${title}">Маникюрный Салон</h1>
-    <p>Мы делаем мир красивее, один ноготь за раз!</p>
+    <p>Мы делаем мир красивее!</p>
     <p th:if="${message}" th:text="${message}" class="alert alert-success"></p>
 </div>
 
@@ -76,30 +76,15 @@
     </div>
     <div class="icon-box">
         <i class="fas fa-paint-brush"></i>
-        <h3>Услуги</h3>
         <p>Мы предлагаем широкий спектр услуг маникюра и педикюра.</p>
+        <a th:href="@{/services}" class="cta-button">Услуги</a>
     </div>
     <div class="icon-box">
         <i class="fas fa-calendar-check"></i>
-        <h3>Записаться</h3>
-        <p>Запишитесь на удобное для вас время.</p>
+        <h3>Запишитесь на удобное для вас время</h3>
+
+        <a href="/appointments/new" class="cta-button">Записаться</a>
     </div>
-</div>
-
-<!-- Динамический список услуг -->
-<div class="container">
-    <h2>Наши Услуги</h2>
-    <ul class="list-group">
-        <li class="list-group-item" th:each="service : ${services}">
-            <span th:text="${service.name}">Название услуги</span> -
-            <span th:text="${service.price}">Цена услуги</span> ₽
-        </li>
-    </ul>
-</div>
-
-<!-- Кнопка для записи -->
-<div class="text-center">
-    <a href="/appointments/new" class="cta-button">Записаться на приём</a>
 </div>
 
 <!-- Кнопка для просмотра записей клиента -->
