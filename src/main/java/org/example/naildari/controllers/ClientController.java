@@ -10,31 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-
-
 @Controller
 @RequestMapping("/clients")
 public class ClientController {
 
     private final ClientService clientService;
-    private final ServiceService serviceService;
 
-    public ClientController(ClientService clientService, ServiceService serviceService) {
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
-        this.serviceService = serviceService;
-    }
-
-    @GetMapping("/")
-    public String home(Model model) {
-        List<Services> services = serviceService.getAllServices();
-        List<Client> clients = clientService.getAllClients();
-
-        model.addAttribute("title", "Маникюрный Салон");
-//        model.addAttribute("services", services); // Список услуг
-        model.addAttribute("clients", clients);   // Список клиентов
-
-        return "home"; // имя шаблона: home.html
     }
 
     @GetMapping("/register")
@@ -66,5 +49,4 @@ public class ClientController {
         redirectAttributes.addFlashAttribute("message", "Данные клиента успешно обновлены!");
         return "redirect:/";
     }
-
 }
